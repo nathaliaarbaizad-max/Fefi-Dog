@@ -1,32 +1,915 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fefi Dog | Consentimos a tu Poodle</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffaf2;
-      color: #49352f;
-    }
-
-    header {
-      padding: 20px;
-      background: #fffaf2;
-      text-align: center;
-    }
-
-    .brand {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #f07862;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriPoodle & Fefi Dog - Nutrición Premium para Caniches</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        poodle: {
+                            50: '#fffbf5',
+                            100: '#f7f0e4',
+                            200: '#edd8bc',
+                            300: '#e2ba8e',
+                            500: '#d9a76a',
+                            600: '#c28b4b',
+                            700: '#9e6a32',
+                            800: '#754b22',
+                            900: '#422810',
+                        },
+                        fefi: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            900: '#831843',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #c28b4b 0%, #db2777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .badge-glow {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #db2777;
+            border-radius: 10px;
+        }
+    </style>
 </head>
-<body>
-  <!-- El archivo descargable contiene la página completa,
-       los estilos, el catálogo y las fotos integradas. -->
+<body class="bg-poodle-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-fefi-200 selection:text-fefi-900">
+
+    <!-- Header Nav -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-poodle-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-poodle-500 to-fefi-500 flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        🐩
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-tight text-poodle-900">Nutri<span class="text-fefi-600">Poodle</span></span>
+                        <span class="hidden sm:block text-[10px] uppercase font-bold tracking-widest text-poodle-600 -mt-1">Especialistas en Poodles</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#hero" class="hover:text-fefi-600 transition-colors py-2">Inicio</a>
+                    <a href="#beneficios" class="hover:text-fefi-600 transition-colors py-2">Nutrición Poodle</a>
+                    <a href="#fefi-dog" class="hover:text-fefi-600 transition-colors py-2 flex items-center gap-1.5 font-bold text-fefi-600">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-fefi-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-fefi-600"></span>
+                        </span>
+                        Fefi Dog Special
+                    </a>
+                    <a href="#calculadora" class="hover:text-fefi-600 transition-colors py-2">Calculadora</a>
+                    <a href="#planes" class="hover:text-fefi-600 transition-colors py-2">Precios</a>
+                    <a href="#testimonios" class="hover:text-fefi-600 transition-colors py-2">Opiniones</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleCart()" class="relative p-3 text-slate-700 hover:text-fefi-600 bg-poodle-100 hover:bg-poodle-200 rounded-full transition-all" aria-label="Ver carrito">
+                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-fefi-600 text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                    </button>
+                    
+                    <a href="#planes" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-xs font-black uppercase tracking-wider rounded-full text-white bg-gradient-to-r from-poodle-600 to-fefi-600 hover:from-poodle-700 hover:to-fefi-700 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        Pedir Ahora
+                    </a>
+
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-700 hover:bg-poodle-100">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-poodle-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-700">Inicio</a>
+            <a href="#beneficios" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-700">Nutrición Poodle</a>
+            <a href="#fefi-dog" onclick="toggleMobileMenu()" class="block py-2 text-base font-bold text-fefi-600">✨ Fefi Dog Special</a>
+            <a href="#calculadora" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-700">Calculadora de Ración</a>
+            <a href="#planes" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-700">Planes y Precios</a>
+            <a href="#testimonios" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-700">Opiniones</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section id="hero" class="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-b from-poodle-100/60 via-white to-poodle-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Text -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fefi-100 border border-fefi-200 text-fefi-700 font-extrabold text-xs tracking-wide uppercase">
+                        <i class="fa-solid fa-crown text-fefi-500"></i> Nutrición Creada para la Raza Poodle
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
+                        Rizos más suaves, digestión sana y <span class="gradient-text">máxima vitalidad</span>.
+                    </h1>
+
+                    <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Fórmula científica adaptada a la anatomía oral, pelaje rizado continuo y estómago sensible de los Poodles en todas sus variedades: Toy, Enano, Mediano y Estándar.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#fefi-dog" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fefi-600 to-fefi-500 hover:from-fefi-700 hover:to-fefi-600 text-white font-extrabold rounded-full shadow-lg shadow-fefi-500/30 hover:shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-3">
+                            <span>Conocer Fefi Dog</span>
+                            <i class="fa-solid fa-sparkles"></i>
+                        </a>
+                        <a href="#calculadora" class="w-full sm:w-auto px-8 py-4 bg-white border-2 border-poodle-200 text-poodle-900 hover:bg-poodle-100 font-bold rounded-full transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calculator text-poodle-600"></i>
+                            <span>Calcular Ración Diaria</span>
+                        </a>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-poodle-200/70 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+                        <div>
+                            <p class="text-2xl font-black text-poodle-800">100%</p>
+                            <p class="text-xs text-slate-500 font-medium">Hipoalergénico Natural</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-black text-fefi-600">Omega 3&6</p>
+                            <p class="text-xs text-slate-500 font-medium">Anti-Nudos & Brillo</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-black text-poodle-800">0%</p>
+                            <p class="text-xs text-slate-500 font-medium">Colorantes Artificiales</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Interactive Poodle SVG Artwork -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md">
+                        <!-- Main Card with SVG Illustration -->
+                        <div class="relative bg-white rounded-3xl p-6 shadow-2xl border-4 border-poodle-100 overflow-hidden">
+                            <!-- High quality custom Poodle Vector -->
+                            <div class="w-full h-80 bg-gradient-to-b from-poodle-100 to-fefi-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                                <svg class="w-64 h-64 drop-shadow-md" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Background Soft Circle -->
+                                    <circle cx="100" cy="100" r="85" fill="#FCE7F3" />
+                                    <!-- Poodle Fluffy Body -->
+                                    <ellipse cx="100" cy="140" rx="45" ry="35" fill="#FFFBF5" stroke="#E2BA8E" stroke-width="3"/>
+                                    <!-- Chest Pompom -->
+                                    <circle cx="100" cy="125" r="30" fill="#FFFFFF" stroke="#E2BA8E" stroke-width="2"/>
+                                    <!-- Head -->
+                                    <circle cx="100" cy="75" r="28" fill="#FFFFFF" stroke="#E2BA8E" stroke-width="3"/>
+                                    <!-- Top Knot Curly Hair -->
+                                    <circle cx="100" cy="45" r="22" fill="#FFFBF5" stroke="#E2BA8E" stroke-width="3"/>
+                                    <circle cx="88" cy="48" r="14" fill="#FFFFFF"/>
+                                    <circle cx="112" cy="48" r="14" fill="#FFFFFF"/>
+                                    <circle cx="100" cy="40" r="14" fill="#FFFFFF"/>
+                                    <!-- Cute Pink Bow -->
+                                    <path d="M85 52 C80 45, 75 58, 90 55 C90 55, 80 62, 88 56 Z" fill="#DB2777"/>
+                                    <path d="M115 52 C120 45, 125 58, 110 55 C110 55, 120 62, 112 56 Z" fill="#DB2777"/>
+                                    <circle cx="100" cy="54" r="5" fill="#BE185D"/>
+                                    <!-- Ears Curly -->
+                                    <ellipse cx="68" cy="80" rx="14" ry="24" fill="#FFFBF5" stroke="#E2BA8E" stroke-width="3"/>
+                                    <ellipse cx="132" cy="80" rx="14" ry="24" fill="#FFFBF5" stroke="#E2BA8E" stroke-width="3"/>
+                                    <!-- Eyes -->
+                                    <circle cx="90" cy="72" r="4.5" fill="#422810"/>
+                                    <circle cx="110" cy="72" r="4.5" fill="#422810"/>
+                                    <circle cx="91.5" cy="70.5" r="1.5" fill="#FFFFFF"/>
+                                    <circle cx="111.5" cy="70.5" r="1.5" fill="#FFFFFF"/>
+                                    <!-- Snout & Nose -->
+                                    <ellipse cx="100" cy="82" rx="10" ry="7" fill="#F7F0E4"/>
+                                    <path d="M96 80 Q100 77 104 80 Q100 85 96 80 Z" fill="#422810"/>
+                                    <path d="M100 83 L100 86 Q96 88 94 86 M100 86 Q104 88 106 86" stroke="#422810" stroke-width="1.5" stroke-linecap="round"/>
+                                    <!-- Tongue -->
+                                    <path d="M98 87 Q100 92 102 87 Z" fill="#EC4899"/>
+                                </svg>
+                                
+                                <span class="absolute bottom-3 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-black text-poodle-800 border border-poodle-200">
+                                    ✨ Fefi Dog - Poodle Feliz
+                                </span>
+                            </div>
+
+                            <div class="mt-4 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Embajadora de la Marca</p>
+                                    <h3 class="text-lg font-black text-slate-800">Fefi Dog SuperPremium</h3>
+                                </div>
+                                <span class="text-2xl font-black text-fefi-600">$29.99</span>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badges -->
+                        <div class="absolute -top-4 -left-4 bg-white px-4 py-3 rounded-2xl shadow-xl border border-poodle-100 flex items-center gap-3">
+                            <span class="text-2xl">🦴</span>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase">Croqueta Especial</p>
+                                <p class="text-xs font-black text-slate-800">Anti-Sarro & Anti-Placa</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-5 -right-4 bg-white px-4 py-3 rounded-2xl shadow-xl border border-fefi-100 flex items-center gap-3 badge-glow">
+                            <span class="text-2xl">✨</span>
+                            <div>
+                                <p class="text-[10px] font-bold text-fefi-600 uppercase">Sin Lagrimeo</p>
+                                <p class="text-xs font-black text-slate-900">Previene Manchas Oculares</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Specific Poodle Nutritional Benefits -->
+    <section id="beneficios" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-fefi-600 text-xs font-black tracking-widest uppercase bg-fefi-50 px-4 py-1.5 rounded-full border border-fefi-100">Cuidado Específico de Raza</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-4 mb-4">
+                    ¿Por qué el Caniche requiere una Dieta Distinta?
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    Los Poodle destacan por su inteligencia y pelaje de crecimiento continuo. No pierden pelo de forma habitual, lo que exige nutrientes clave para regenerar su piel y fibra capilar.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Benefit Card 1 -->
+                <div class="bg-poodle-50/60 rounded-3xl p-8 border border-poodle-100 hover:border-poodle-300 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-poodle-500 to-poodle-600 text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        ✨
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Rizos Suaves & Piel Protegida</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Enriquecido con aceite de salmón, biotina y omega 3/6 que nutren el folículo piloso desde la raíz, previniendo nudos y resequedad cutánea.
+                    </p>
+                    <ul class="text-xs space-y-2 text-slate-700 font-bold">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-poodle-600"></i> Brillo y volumen sin frizz</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-poodle-600"></i> Control de picazón y caspa</li>
+                    </ul>
+                </div>
+
+                <!-- Benefit Card 2 -->
+                <div class="bg-fefi-50/50 rounded-3xl p-8 border border-fefi-100 hover:border-fefi-300 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-fefi-500 to-fefi-600 text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        🌿
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Digestión Liviana e Hipoalergénica</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Proteína pura de salmón y pavo libre de grano (Grain Free). Prebióticos FOS/MOS para prevenir gases, pesadez o inflamación estomacal.
+                    </p>
+                    <ul class="text-xs space-y-2 text-slate-700 font-bold">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Deposiciones pequeñas y firmes</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Tolerancia garantizada al 99%</li>
+                    </ul>
+                </div>
+
+                <!-- Benefit Card 3 -->
+                <div class="bg-poodle-50/60 rounded-3xl p-8 border border-poodle-100 hover:border-poodle-300 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-poodle-500 to-poodle-600 text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        🦷
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Salud Dental Activa</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Croqueta pequeña con textura abrasiva natural y quelantes de calcio que atrapan el sarro antes de que se calcifique en los dientes.
+                    </p>
+                    <ul class="text-xs space-y-2 text-slate-700 font-bold">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-poodle-600"></i> Aliento fresco constante</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-poodle-600"></i> Diseñada para mandíbulas pequeñas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Product Section: FEFI DOG -->
+    <section id="fefi-dog" class="py-16 md:py-24 bg-gradient-to-br from-poodle-900 via-slate-900 to-fefi-900 text-white relative overflow-hidden">
+        <!-- Background decorative glows -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-fefi-600/20 rounded-full filter blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-poodle-500/20 rounded-full filter blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Product Presentation Card -->
+                <div class="lg:col-span-5">
+                    <div class="relative max-w-sm mx-auto">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-fefi-500 to-poodle-500 rounded-3xl blur opacity-70 animate-pulse"></div>
+                        <div class="relative bg-slate-900 rounded-3xl p-6 border border-white/10 shadow-2xl text-center">
+                            <span class="inline-block bg-fefi-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-4 shadow">
+                                ★ Fórmula Exclusiva Fefi Dog
+                            </span>
+
+                            <!-- Bag Graphic -->
+                            <div class="w-full h-72 bg-gradient-to-b from-fefi-900/60 to-poodle-900/80 rounded-2xl border border-white/10 flex flex-col items-center justify-center p-6 relative">
+                                <div class="w-24 h-24 bg-fefi-500/20 rounded-full flex items-center justify-center text-5xl mb-3 shadow-inner">
+                                    🐩
+                                </div>
+                                <h4 class="text-2xl font-black text-white tracking-tight">FEFI DOG</h4>
+                                <span class="text-xs font-bold text-fefi-300 tracking-widest uppercase">Poodle Gourmet Special</span>
+                                <p class="text-[11px] text-slate-400 mt-2">Salmón Hidrolizado & Trocitos de Zanahoria</p>
+                                
+                                <div class="absolute bottom-3 right-3 bg-white/10 px-3 py-1 rounded-lg text-xs font-bold text-poodle-200">
+                                    3.0 KG
+                                </div>
+                            </div>
+
+                            <div class="mt-6 flex items-center justify-between text-left bg-white/5 p-4 rounded-xl border border-white/10">
+                                <div>
+                                    <p class="text-[10px] uppercase font-bold text-slate-400">Presentación Destacada</p>
+                                    <p class="text-sm font-extrabold text-white">Fefi Dog Gourmet 3kg</p>
+                                </div>
+                                <span class="text-2xl font-black text-fefi-400">$29.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Information -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-fefi-300 font-bold text-xs tracking-widest uppercase">
+                        <i class="fa-solid fa-award text-yellow-400"></i> Receta Nutracéutica de Altísima Gama
+                    </div>
+
+                    <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                        Nutrición Inspirada en la Alegría de <span class="text-transparent bg-clip-text bg-gradient-to-r from-fefi-400 to-poodle-300">Fefi Dog</span>
+                    </h2>
+
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Desarrollada para ofrecer la máxima biodisponibilidad digestiva. **Fefi Dog** combina el salmón fresco rico en Omega 3 con arándanos y betacarotenos naturales para proteger la salud ocular y evitar las molestas manchas en el pelo blanco o beige.
+                    </p>
+
+                    <!-- Feature Bullets Grid -->
+                    <div class="grid sm:grid-cols-2 gap-4 text-left pt-2">
+                        <div class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-fish text-fefi-400 text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Salmón + Pavo</h4>
+                                <p class="text-xs text-slate-400">Proteínas hipoalergénicas puras de fácil asimilación.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-eye text-fefi-400 text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Anti-Manchas de Lagrimeo</h4>
+                                <p class="text-xs text-slate-400">Reduce la oxidación en la zona periocular.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-carrot text-fefi-400 text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Zanahoria & Súper Alimentos</h4>
+                                <p class="text-xs text-slate-400">Aporta betacarotenos y fibra natural crujiente.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-wheat-awn-circle-exclamation text-fefi-400 text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">100% Sin Granos (Grain-Free)</h4>
+                                <p class="text-xs text-slate-400">Cero maíz, cero soya, cero subproductos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start">
+                        <button onclick="addToCart('Fefi Dog Gourmet 3kg', 29.99)" 
+                                class="px-8 py-4 bg-fefi-600 hover:bg-fefi-500 text-white font-black rounded-full shadow-lg shadow-fefi-600/40 hover:shadow-xl transition-all flex items-center gap-3 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>Añadir Fefi Dog al Carrito ($29.99)</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Portion Calculator -->
+    <section id="calculadora" class="py-16 md:py-24 bg-poodle-50/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-poodle-200">
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <span class="text-poodle-700 text-xs font-black tracking-widest uppercase bg-poodle-100 px-4 py-1.5 rounded-full">Calculadora Interactiva</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-3 mb-2">Calcula la Ración Diaria Exacta</h2>
+                    <p class="text-slate-600 text-sm">Descubre cuántos gramos de comida necesita tu Poodle según su peso, variedad y nivel de actividad.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Controls -->
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Variedad de Poodle</label>
+                            <select id="calc-variety" onchange="calculatePortion()" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fefi-500 outline-none text-sm font-semibold text-slate-800">
+                                <option value="toy">Poodle Toy (Hasta 4 kg)</option>
+                                <option value="mini" selected>Poodle Miniatura / Enano (4 - 8 kg)</option>
+                                <option value="medium">Poodle Mediano (8 - 14 kg)</option>
+                                <option value="standard">Poodle Estándar / Gigante (15 - 25 kg)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase text-slate-700 mb-1">
+                                <span>Peso Corporal Exacto</span>
+                                <span id="weight-val" class="text-fefi-600 font-extrabold text-sm">5.0 kg</span>
+                            </div>
+                            <input type="range" id="calc-weight" min="1" max="25" step="0.5" value="5" oninput="calculatePortion()" class="w-full accent-fefi-600 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nivel de Actividad</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setActivity('baja')" id="act-baja" class="act-btn py-2.5 px-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-poodle-100">Baja</button>
+                                <button type="button" onclick="setActivity('normal')" id="act-normal" class="act-btn py-2.5 px-3 border-2 border-fefi-500 bg-fefi-50 rounded-xl text-xs font-bold text-fefi-700">Normal</button>
+                                <button type="button" onclick="setActivity('alta')" id="act-alta" class="act-btn py-2.5 px-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-poodle-100">Alta</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Box -->
+                    <div class="bg-gradient-to-br from-poodle-100 to-fefi-100 p-8 rounded-3xl border border-poodle-200 text-center flex flex-col justify-center items-center space-y-3">
+                        <span class="text-3xl">🥣</span>
+                        <p class="text-xs uppercase font-extrabold text-poodle-800 tracking-wider">Ración Diaria Recomendada</p>
+                        <p id="result-grams" class="text-5xl font-black text-fefi-700">95 g</p>
+                        <p id="result-cups" class="text-xs font-bold text-slate-600">Equivale a aprox. 1 taza por día</p>
+                        
+                        <div class="pt-2 text-[11px] text-slate-500 max-w-xs leading-tight">
+                            * Dividir preferentemente en 2 tomas al día (Mañana y Noche) para evitar torsión gástrica.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing and Product Options -->
+    <section id="planes" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-poodle-700 text-xs font-black tracking-widest uppercase bg-poodle-100 px-4 py-1.5 rounded-full">Planes y Presentaciones</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-4 mb-4">
+                    Selecciona el Formato Ideal para tu Poodle
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Pide bolsas individuales o suscríbete para recibir tu envío automático mensual con descuento.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Plan 1 -->
+                <div class="bg-poodle-50/40 rounded-3xl p-8 border border-poodle-200 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Prueba o Viaje</span>
+                            <span class="bg-poodle-100 text-poodle-800 text-xs font-bold px-3 py-1 rounded-full">1.5 kg</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-2">NutriPoodle Mini</h3>
+                        <p class="text-slate-500 text-xs mb-6">Ideal para cachorros o probar la palatabilidad.</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-slate-900">$16.50</span>
+                            <span class="text-slate-500 text-xs"> / bolsa</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-slate-700 font-medium mb-8 border-t border-slate-100 pt-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Fórmula Estándar Poodle</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Croqueta micro-adaptada</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Cierre hermético zipper</li>
+                        </ul>
+                    </div>
+                    <button onclick="addToCart('NutriPoodle Mini 1.5kg', 16.50)" class="w-full py-3.5 bg-poodle-100 hover:bg-poodle-200 text-poodle-900 font-extrabold rounded-2xl transition-colors text-xs uppercase tracking-wider">
+                        Añadir al Carrito
+                    </button>
+                </div>
+
+                <!-- Plan 2: FEFI DOG Highlighted -->
+                <div class="bg-gradient-to-b from-fefi-50 via-white to-fefi-50/30 rounded-3xl p-8 border-2 border-fefi-500 shadow-xl relative flex flex-col justify-between transform md:-translate-y-3">
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-fefi-600 to-poodle-600 text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-full shadow tracking-wider">
+                        Recomendado por Veterinarios
+                    </span>
+                    <div>
+                        <div class="flex justify-between items-center mb-4 mt-2">
+                            <span class="text-[10px] font-black uppercase text-fefi-600 tracking-wider">Fórmula Especial Fefi</span>
+                            <span class="bg-fefi-100 text-fefi-700 text-xs font-bold px-3 py-1 rounded-full">3.0 kg</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-2">Fefi Dog Premium</h3>
+                        <p class="text-slate-500 text-xs mb-6">Máximo cuidado para pelaje rizado y estómagos delicados.</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-fefi-600">$29.99</span>
+                            <span class="text-slate-500 text-xs"> / bolsa</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-slate-800 font-bold mb-8 border-t border-fefi-100 pt-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Proteína de Salmón Hidrolizado</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Tratamiento Anti-Manchas Oculares</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Dosis Óptima de Omega 3 & 6</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-fefi-600"></i> Envío Estándar Incluido</li>
+                        </ul>
+                    </div>
+                    <button onclick="addToCart('Fefi Dog Premium 3kg', 29.99)" class="w-full py-4 bg-fefi-600 hover:bg-fefi-700 text-white font-black rounded-2xl shadow-lg shadow-fefi-500/30 transition-all text-xs uppercase tracking-wider">
+                        Elegir Fefi Dog ($29.99)
+                    </button>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="bg-poodle-50/40 rounded-3xl p-8 border border-poodle-200 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Ahorro Familiar</span>
+                            <span class="bg-poodle-100 text-poodle-800 text-xs font-bold px-3 py-1 rounded-full">7.5 kg</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-2">NutriPoodle Maxi Pack</h3>
+                        <p class="text-slate-500 text-xs mb-6">Para Caniches Medianos/Estándar o múltiples perritos.</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-slate-900">$59.00</span>
+                            <span class="text-slate-500 text-xs"> / bolsa</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-slate-700 font-medium mb-8 border-t border-slate-100 pt-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Fórmula Completa Hipoalergénica</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Mejor costo por kilogramo ($7.8/kg)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-poodle-600 font-bold"></i> Envío Express Gratis</li>
+                        </ul>
+                    </div>
+                    <button onclick="addToCart('NutriPoodle Maxi Pack 7.5kg', 59.00)" class="w-full py-3.5 bg-poodle-100 hover:bg-poodle-200 text-poodle-900 font-extrabold rounded-2xl transition-colors text-xs uppercase tracking-wider">
+                        Añadir al Carrito
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonios" class="py-16 md:py-24 bg-poodle-50/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-fefi-600 text-xs font-black tracking-widest uppercase bg-fefi-50 px-4 py-1.5 rounded-full border border-fefi-100">Familias Poodle Felices</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-4 mb-4">
+                    Opiniones de Dueños de Caniches
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Historias reales de cambios positivos en la salud, pelaje y energía de sus mascotas.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-3xl border border-poodle-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 italic">
+                            "Mi perrita Poodle Toy sufría constantemente de picazón y lagrimeo. Desde que comenzó con **Fefi Dog**, sus rizos están suaves como una nube y sus ojos completamente limpios."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-fefi-100 flex items-center justify-center text-lg">🐩</div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-xs">Camila R.</h4>
+                            <p class="text-[10px] text-slate-500">Mamá de Luna (Poodle Toy, 2 años)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-3xl border border-poodle-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 italic">
+                            "Era extremadamente quisquilloso con la comida. Con Fefi Dog limpia el plato de inmediato. Además se nota que no le genera pesadez estomacal."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-poodle-100 flex items-center justify-center text-lg">🐩</div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-xs">Jorge S.</h4>
+                            <p class="text-[10px] text-slate-500">Papá de Toby (Poodle Enano, 4 años)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-3xl border border-poodle-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 italic">
+                            "Compré el Maxi Pack para mis dos Caniches. Ha reducido drásticamente el sarro de los dientes y el pelaje luce con mucho más volumen."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-fefi-100 flex items-center justify-center text-lg">🐩</div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-xs">Valeria M.</h4>
+                            <p class="text-[10px] text-slate-500">Dueña de Bella y Bubu (Poodles Medianos)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-2xl">🐩</span>
+                        <span class="text-xl font-black text-white">Nutri<span class="text-fefi-500">Poodle</span></span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        Marca especializada en la nutrición integral, salud del pelaje y bienestar de los perritos de raza Caniche / Poodle.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-xs font-black mb-4 uppercase tracking-wider">Productos</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#fefi-dog" class="hover:text-white transition-colors">Fefi Dog Gourmet 3kg</a></li>
+                        <li><a href="#planes" class="hover:text-white transition-colors">NutriPoodle Mini 1.5kg</a></li>
+                        <li><a href="#planes" class="hover:text-white transition-colors">NutriPoodle Maxi Pack 7.5kg</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-xs font-black mb-4 uppercase tracking-wider">Herramientas</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#calculadora" class="hover:text-white transition-colors">Calculadora de Raciones</a></li>
+                        <li><a href="#beneficios" class="hover:text-white transition-colors">Cuidados del Pelaje Rizado</a></li>
+                        <li><a href="#beneficios" class="hover:text-white transition-colors">Prevención de Lagrimeo</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-xs font-black mb-4 uppercase tracking-wider">Garantía</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Garantía de sabor de 14 días. Si a tu Caniche no le gusta la receta, te reembolsamos el total de tu pedido.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+                <p>&copy; 2026 NutriPoodle & Fefi Dog Special. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-6 bg-poodle-50 border-b border-poodle-200 flex items-center justify-between">
+                    <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-fefi-600"></i> Tu Carrito Poodle
+                    </h2>
+                    <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 p-2 rounded-full">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Items List -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                    <!-- Dynamic cart items will render here -->
+                </div>
+
+                <!-- Summary Footer -->
+                <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+                    <div class="space-y-1 text-xs">
+                        <div class="flex justify-between text-slate-600">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal" class="font-bold text-slate-900">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>Envío</span>
+                            <span class="font-bold text-emerald-600">GRATIS</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-black text-slate-900 pt-2 border-t border-slate-200">
+                            <span>Total</span>
+                            <span id="cart-total" class="text-fefi-600">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="checkout()" class="w-full py-4 bg-gradient-to-r from-fefi-600 to-poodle-600 hover:from-fefi-700 hover:to-poodle-700 text-white font-black rounded-2xl shadow-lg transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                        <span>Finalizar Pedido</span>
+                        <i class="fa-solid fa-lock text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // Shopping Cart State
+        let cart = [];
+        let activeActivity = 'normal';
+
+        // Add Product to Cart
+        function addToCart(title, price) {
+            const existingIndex = cart.findIndex(item => item.title === title);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({ title, price, quantity: 1 });
+            }
+            updateCartUI();
+            showNotification(`¡${title} se ha añadido al carrito!`);
+        }
+
+        // Remove Product
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Adjust Quantities
+        function changeQuantity(index, delta) {
+            if (cart[index]) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Update Cart Drawer & Badge
+        function updateCartUI() {
+            const cartCountEl = document.getElementById('cart-count');
+            const cartItemsEl = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cartCountEl.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = `
+                    <div class="text-center py-12 text-slate-400 space-y-3">
+                        <span class="text-5xl">🐩</span>
+                        <p class="text-xs font-bold text-slate-600">Tu carrito está vacío</p>
+                        <p class="text-[11px]">¡Agrega Fefi Dog para consentir a tu Poodle!</p>
+                    </div>
+                `;
+            } else {
+                cartItemsEl.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center gap-3 bg-poodle-50/60 p-3.5 rounded-2xl border border-poodle-200">
+                        <div class="w-12 h-12 rounded-xl bg-fefi-100 flex items-center justify-center text-xl font-bold text-fefi-600">
+                            🐩
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-black text-slate-900 truncate">${item.title}</h4>
+                            <p class="text-xs font-bold text-fefi-600 mt-0.5">$${item.price.toFixed(2)}</p>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="changeQuantity(${index}, -1)" class="w-5 h-5 rounded bg-white border border-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center hover:bg-slate-100">-</button>
+                                <span class="text-xs font-bold text-slate-900">${item.quantity}</span>
+                                <button onclick="changeQuantity(${index}, 1)" class="w-5 h-5 rounded bg-white border border-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center hover:bg-slate-100">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-slate-400 hover:text-red-500 p-1">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            totalEl.textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        // Toggle Drawer Visibility
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Portion Calculator Logic
+        function setActivity(level) {
+            activeActivity = level;
+            document.querySelectorAll('.act-btn').forEach(btn => {
+                btn.className = 'act-btn py-2.5 px-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-poodle-100';
+            });
+
+            const activeBtn = document.getElementById(`act-${level}`);
+            activeBtn.className = 'act-btn py-2.5 px-3 border-2 border-fefi-500 bg-fefi-50 rounded-xl text-xs font-bold text-fefi-700';
+
+            calculatePortion();
+        }
+
+        function calculatePortion() {
+            const weight = parseFloat(document.getElementById('calc-weight').value);
+            document.getElementById('weight-val').textContent = `${weight.toFixed(1)} kg`;
+
+            let baseGrams = weight * 18; // Base factor for small/medium dogs
+
+            if (activeActivity === 'baja') baseGrams *= 0.85;
+            if (activeActivity === 'alta') baseGrams *= 1.25;
+
+            const finalGrams = Math.round(baseGrams);
+            const cups = (finalGrams / 90).toFixed(1);
+
+            document.getElementById('result-grams').textContent = `${finalGrams} g`;
+            document.getElementById('result-cups').textContent = `Equivale a aprox. ${cups} ${cups === '1.0' ? 'taza' : 'tazas'} al día`;
+        }
+
+        // Checkout Simulation
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification("Agrega productos antes de finalizar la compra.", "error");
+                return;
+            }
+            alert("¡Muchas gracias por tu pedido! Se ha generado la orden correctamente para tu Poodle.");
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Toast Notification
+        function showNotification(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 right-6 z-50 px-5 py-3.5 rounded-2xl shadow-xl text-xs font-black text-white flex items-center gap-3 transition-all transform translate-y-10 opacity-0 ${
+                type === 'error' ? 'bg-red-600' : 'bg-gradient-to-r from-fefi-600 to-poodle-700'
+            }`;
+            toast.innerHTML = `
+                <i class="fa-solid ${type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check'} text-base"></i>
+                <span>${message}</span>
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize Calculator & Cart on load
+        window.onload = function() {
+            updateCartUI();
+            calculatePortion();
+        };
+    </script>
 </body>
 </html>
